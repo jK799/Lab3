@@ -23,6 +23,6 @@ class Triangle extends Shape {
 
     @Override
     public void print() {
-        System.out.println("Kolory trójkąta: " + getColorDescription());
+        System.out.println("Trójkąt o kolorze: " + getColorDescription());
     }
 }

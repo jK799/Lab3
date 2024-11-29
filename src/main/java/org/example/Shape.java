@@ -12,7 +12,7 @@ abstract class Shape {
     }
 
     public String getColorDescription() {
-        return "Red: " + color.Red() + ", Green: " + color.Green() + ", Blue: " + color.Blue();
+        return "Czerwony: " + color.Red() + ", Zielony: " + color.Green() + ", Niebieski: " + color.Blue();
     }
 
     public abstract double getArea();
