@@ -2,7 +2,7 @@ package org.example;
 
 import java.util.List;
 
-class ShapeRenderer {
+public class ShapeRenderer {
 
     public void render(List<Shape> shapes) {
         for (Shape shape : shapes) {

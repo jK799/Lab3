@@ -1,6 +1,6 @@
 package org.example;
 
-class Triangle extends Shape {
+public class Triangle extends Shape {
     private double a, b, c;
 
     public Triangle(double a, double b, double c, Color color) {

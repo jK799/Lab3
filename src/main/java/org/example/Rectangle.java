@@ -1,6 +1,6 @@
 package org.example;
 
-class Rectangle extends Shape {
+public class Rectangle extends Shape {
     private double width;
     private double height;
 
