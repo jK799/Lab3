@@ -13,6 +13,7 @@ public class Main {
         // Opis figur
         ShapeDescriber describer = new ShapeDescriber();
 
+        
         System.out.println("Prostokąt:");
         describer.describe(rectangle);
 
