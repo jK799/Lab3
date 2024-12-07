@@ -1,5 +1,10 @@
 package org.example;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "triangles")
 public class Triangle extends Shape {
     private double a, b, c;
 

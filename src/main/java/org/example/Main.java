@@ -1,5 +1,10 @@
 package org.example;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,5 +36,32 @@ public class Main {
         // Renderowanie figur
         ShapeRenderer renderer = new ShapeRenderer();
         renderer.render(shapes);
+
+        // Konfiguracja Hibernate
+        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+
+        // Zapis figur do bazy danych
+        try (Session session = sessionFactory.openSession()) {
+            Transaction transaction = session.beginTransaction();
+
+            session.save(prostokat);
+            session.save(trojkat);
+            session.save(duzyProstokat);
+
+            transaction.commit();
+            System.out.println("Figury zapisano do bazy danych.");
+        }
+
+        // Odczyt figur z bazy danych
+        try (Session session = sessionFactory.openSession()) {
+            List<Shape> savedShapes = session.createQuery("from Shape", Shape.class).list();
+            System.out.println("Figury odczytane z bazy danych:");
+            for (Shape shape : savedShapes) {
+                opisFigur.describe(shape);
+            }
+        }
+
+        // Zamknięcie SessionFactory
+        sessionFactory.close();
     }
 }

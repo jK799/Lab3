@@ -1,6 +1,10 @@
 package org.example;
 
+import jakarta.persistence.*;
+
+@MappedSuperclass
 public abstract class Shape {
+    @Embedded
     private Color color;
 
     public Shape(Color color) {
