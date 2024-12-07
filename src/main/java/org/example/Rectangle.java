@@ -9,10 +9,8 @@ public class Rectangle extends Shape {
     private double width;
     private double height;
 
-    // Konstruktor bezargumentowy dla Hibernate
     public Rectangle() {}
 
-    // Konstruktor z argumentami
     public Rectangle(double width, double height, Color color) {
         super(color);
         this.width = width;
