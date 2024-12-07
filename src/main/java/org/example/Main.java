@@ -1,10 +1,5 @@
 package org.example;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,31 +32,30 @@ public class Main {
         ShapeRenderer renderer = new ShapeRenderer();
         renderer.render(shapes);
 
-        // Konfiguracja Hibernate
-        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+        // Inicjalizacja DAO
+        ShapeDAO shapeDAO = new ShapeDAO();
 
         // Zapis figur do bazy danych
-        try (Session session = sessionFactory.openSession()) {
-            Transaction transaction = session.beginTransaction();
+        shapeDAO.save(prostokat);
+        shapeDAO.save(trojkat);
+        shapeDAO.save(duzyProstokat);
+        System.out.println("Figury zapisano do bazy danych.");
 
-            session.save(prostokat);
-            session.save(trojkat);
-            session.save(duzyProstokat);
-
-            transaction.commit();
-            System.out.println("Figury zapisano do bazy danych.");
+        // Odczyt prostokątów z bazy danych
+        List<Rectangle> rectangles = shapeDAO.getAll(Rectangle.class);
+        System.out.println("Prostokąty odczytane z bazy danych:");
+        for (Rectangle rectangle : rectangles) {
+            opisFigur.describe(rectangle);
         }
 
-        // Odczyt figur z bazy danych
-        try (Session session = sessionFactory.openSession()) {
-            List<Shape> savedShapes = session.createQuery("from Shape", Shape.class).list();
-            System.out.println("Figury odczytane z bazy danych:");
-            for (Shape shape : savedShapes) {
-                opisFigur.describe(shape);
-            }
+        // Odczyt trójkątów z bazy danych
+        List<Triangle> triangles = shapeDAO.getAll(Triangle.class);
+        System.out.println("Trójkąty odczytane z bazy danych:");
+        for (Triangle triangle : triangles) {
+            opisFigur.describe(triangle);
         }
 
-        // Zamknięcie SessionFactory
-        sessionFactory.close();
+        // Zamknięcie DAO
+        shapeDAO.close();
     }
 }

@@ -4,11 +4,23 @@ import jakarta.persistence.*;
 
 @MappedSuperclass
 public abstract class Shape {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @Embedded
     private Color color;
 
+    // Konstruktor bezargumentowy wymagany przez Hibernate
+    public Shape() {}
+
+    // Konstruktor z argumentami
     public Shape(Color color) {
         this.color = color;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public Color getColor() {
@@ -16,7 +28,7 @@ public abstract class Shape {
     }
 
     public String getColorDescription() {
-        return "Czerwony: " + color.Red() + ", Zielony: " + color.Green() + ", Niebieski: " + color.Blue();
+        return "Czerwony: " + color.getRed() + ", Zielony: " + color.getGreen() + ", Niebieski: " + color.getBlue();
     }
 
     public abstract double getArea();

@@ -3,11 +3,28 @@ package org.example;
 import jakarta.persistence.Embeddable;
 
 @Embeddable
-public record Color(int Red, int Green, int Blue) {
+public class Color {
+    private int red;
+    private int green;
+    private int blue;
 
-    public Color {
-        if (Red < 0 || Red > 255 || Green < 0 || Green > 255 || Blue < 0 || Blue > 255) {
-            throw new IllegalArgumentException("Prosze podać wartość z przedziału 0 do 255");
-        }
+    public Color() {}
+
+    public Color(int red, int green, int blue) {
+        this.red = red;
+        this.green = green;
+        this.blue = blue;
+    }
+
+    public int getRed() {
+        return red;
+    }
+
+    public int getGreen() {
+        return green;
+    }
+
+    public int getBlue() {
+        return blue;
     }
 }
